@@ -31,10 +31,32 @@ const todoSchema = new mongoose.Schema({
   notes: String,
 });
 
+// const todoSchema = new mongoose.Schema({
+//   {
+//     "comment": {
+//       "content": [
+//         {
+//           "content": [
+//             {
+//               "text": String,
+//               "type": String
+//             }
+//           ],
+//           "type": String
+//         }
+//       ],
+//       "type": String,
+//       "version": String
+//     },
+//     "started": String,
+//     "timeSpentSeconds": String,
+//   }
+// });
+
 const Todo = mongoose.model('Todo', todoSchema);
 
 // Definir as rotas da API
-app.get('/todos', async (req, res) => {
+app.get('/api/get-todos', async (req, res) => {
   try {
     const todos = await Todo.find();
     res.json(todos);
@@ -43,7 +65,7 @@ app.get('/todos', async (req, res) => {
   }
 });
 
-app.post('/todos', async (req, res) => {
+app.post('/api/post-todos', async (req, res) => {
   try {
     const newTodo = new Todo(req.body);
     await newTodo.save();
@@ -54,7 +76,7 @@ app.post('/todos', async (req, res) => {
 });
 
 // Atualizar uma tarefa
-app.put('/todos/:id', async (req, res) => {
+app.put('/api/upload-todos/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const updatedTodo = req.body;
@@ -66,7 +88,7 @@ app.put('/todos/:id', async (req, res) => {
 });
 
 // Excluir uma tarefa
-app.delete('/todos/:id', async (req, res) => {
+app.delete('/api/delete-todos/:id', async (req, res) => {
   try {
     const { id } = req.params;
     await Todo.findByIdAndDelete(id);
