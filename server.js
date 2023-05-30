@@ -22,7 +22,7 @@ db.once('open', () => {
 });
 
 
-// Definir o modelo de dados do ToDo
+//Definir o modelo de dados do ToDo
 const todoSchema = new mongoose.Schema({
   text: String,
   date: String,
