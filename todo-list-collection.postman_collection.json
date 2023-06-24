@@ -1,0 +1,406 @@
+{
+	"info": {
+		"_postman_id": "18978f38-0797-4f1e-bc0a-67588c237cfa",
+		"name": "todo-list-collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "GetLogin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"Email\",\r\n    \"password\": \"Senha\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/sessions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"sessions"
+							]
+						},
+						"description": "endpoint de login de um usuário"
+					},
+					"response": []
+				}
+			],
+			"description": "Controller criado para validar o login de um usuário"
+		},
+		{
+			"name": "Usuários",
+			"item": [
+				{
+					"name": "Tarefas",
+					"item": [
+						{
+							"name": "GetTask",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5001/users/:user_id/tasks",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"users",
+										":user_id",
+										"tasks"
+									],
+									"variable": [
+										{
+											"key": "user_id",
+											"value": ""
+										}
+									]
+								},
+								"description": "Endpoint que busca as tarefas de um usuário"
+							},
+							"response": []
+						},
+						{
+							"name": "GetTaskByDate",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5001/users/:user_id/tasks/:date_task",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"users",
+										":user_id",
+										"tasks",
+										":date_task"
+									],
+									"variable": [
+										{
+											"key": "user_id",
+											"value": ""
+										},
+										{
+											"key": "date_task",
+											"value": ""
+										}
+									]
+								},
+								"description": "Endpoint que busca as tarefas de um certo dia"
+							},
+							"response": []
+						},
+						{
+							"name": "CreateTask",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"taskCode\":\"XXXX\", \r\n\"date\":\"2023-06-24\", \r\n\"timeSpent\":\"1h30m\", \r\n\"notes\":\"teste\", \r\n\"tag\":\"teste\" }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5001/users/:user_id/tasks",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"users",
+										":user_id",
+										"tasks"
+									],
+									"variable": [
+										{
+											"key": "user_id",
+											"value": ""
+										}
+									]
+								},
+								"description": "Endpoint que cria uma tarefa para um usuário"
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteTask",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5001/users/:user_id/tasks/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"users",
+										":user_id",
+										"tasks",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "user_id",
+											"value": ""
+										},
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								},
+								"description": "Endpoint que deleta uma tarefa para um usuário"
+							},
+							"response": []
+						}
+					],
+					"description": "Controller dentro do controller de usuários, que relaciona apenas os endpoints de tarefas"
+				},
+				{
+					"name": "CreateUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\":\"Nome\",\r\n    \"email\":\"Email\",\r\n    \"password\": \"Senha\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"users"
+							]
+						},
+						"description": "Endpoint que cria um usuário no banco, e criptografa a senha do mesmo. Único endpoint que não precisa de autorização"
+					},
+					"response": []
+				},
+				{
+					"name": "GetUsers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"users"
+							]
+						},
+						"description": "Endpoint que busca todos os usuários no banco de dados"
+					},
+					"response": []
+				},
+				{
+					"name": "GetUserById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/users/:user_id", 
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"users",
+								":user_id"
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": ""
+								}
+							]
+						},
+						"description": "Endpoint que busca um único usuário via id"
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\":\"Nome\",\r\n    \"email\":\"Email\",\r\n    \"password\": \"Senha\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/users/:user_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"users",
+								":user_id"
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": ""
+								}
+							]
+						},
+						"description": "endpoint que faz a atualização de um usuário no banco de dados"
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/users/:user_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"users",
+								":user_id"
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": ""
+								}
+							]
+						},
+						"description": "Endpoint que deleta usuário dentro do banco de dados"
+					},
+					"response": []
+				}
+			],
+			"description": "Controller criado para todos os endpoints relacionados ao usuário do sistema"
+		}
+	]
+}
